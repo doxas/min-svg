@@ -9,5 +9,11 @@ export default class SVGUtils {
     static encodeHTML(element){
         return element.outerHTML;
     }
+    static encodeBase64(str){
+        return btoa(unescape(encodeURIComponent(str)));
+    }
+    static decodeBase64(str){
+        return decodeURIComponent(escape(atob(str)));
+    }
 }
 
