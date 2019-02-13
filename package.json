@@ -1,0 +1,19 @@
+{
+  "name": "svg-utils",
+  "version": "1.0.0",
+  "description": "svg utilities",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doxas/svg-utils.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/doxas/svg-utils/issues"
+  },
+  "homepage": "https://github.com/doxas/svg-utils#readme"
+}
