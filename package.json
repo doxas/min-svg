@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/doxas/svg-utils.git"
   },
-  "author": "",
+  "author": "doxas",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/doxas/svg-utils/issues"
