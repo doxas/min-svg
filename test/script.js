@@ -20,12 +20,10 @@ window.addEventListener('load', () => {
     let i = new Image();
     i.src = uri;
     document.body.appendChild(i);
-    console.log(uri);
 
     let b64 = util.toDataURI64(svg);
     let j = new Image();
     j.src = b64;
     document.body.appendChild(j);
-    console.log(b64);
 }, false);
 
