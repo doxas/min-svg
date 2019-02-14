@@ -269,14 +269,10 @@ class PathData {
         }
         let rad = Math.min(Math.min(width, height) / 2, radius);
         this.moveTo(x + rad, y)
-        .lineTo(x + width - rad, y)
-        .quadraticCurveTo(x + width, y, x + width, y + rad)
-        .lineTo(x + width, y + height - rad)
-        .quadraticCurveTo(x + width, y + height, x + width - rad, y + height)
-        .lineTo(x + rad, y + height)
-        .quadraticCurveTo(x, y + height, x, y + height - rad)
-        .lineTo(x, y + rad)
-        .quadraticCurveTo(x, y, x + rad, y)
+        .lineTo(x + width - rad, y)               .quadraticCurveTo(x + width, y,          x + width,       y + rad)
+        .lineTo(x + width,       y + height - rad).quadraticCurveTo(x + width, y + height, x + width - rad, y + height)
+        .lineTo(x + rad,         y + height)      .quadraticCurveTo(x,         y + height, x,               y + height - rad)
+        .lineTo(x,               y + rad)         .quadraticCurveTo(x,         y,          x + rad,         y)
         .closePath();
         return this;
     }
@@ -287,6 +283,12 @@ class PathData {
     closePath(){
         this.data += 'Z';
         return this;
+    }
+    /**
+     * release
+     */
+    release(){
+        this.data = null;
     }
 }
 

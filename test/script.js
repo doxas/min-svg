@@ -2,15 +2,12 @@
 import util from '../index.js';
 
 window.addEventListener('load', () => {
-    // svg 要素など名前空間を必要とする要素の生成
-    let svg = util.createNS('svg', 300, 300);
-    // setAttribute で属性を付与
-    util.setAttribute(svg, {
-        fill: 'royalblue',
-        stroke: 'navy',
-    });
     // path 要素の d 属性値を作るためのオブジェクト
+    // ~To で終わるものはパスを明示的に閉じないしサブパスを開始することもない
+    // そうでないものはサブパスを追加し自身でパスを閉じる
     let pathData = util.createPathData();
+
+    // パスの生成
     pathData
     .moveTo(50, 50)
     .lineTo(100, 100, 150, 75)
@@ -22,16 +19,33 @@ window.addEventListener('load', () => {
     .rect(75, 75, 50, 50)
     .roundRect(125, 125, 100, 100, 25);
 
+    // svg 要素など名前空間を必要とする要素の生成
+    let svg = util.createNS('svg', 300, 300);
+    // setAttribute で属性を付与
+    util.setAttribute(svg, {
+        fill: 'royalblue',
+        stroke: 'navy',
+    });
     let path = util.createNS('path');
     util.setAttribute(path, {
         'stroke-width': 3,
         d: pathData.d
     });
+    // style として付与する
+    util.setStyle(path, {
+        'stroke-dasharray': '5, 2'
+    });
     svg.appendChild(path);
 
+    // おそうじ例
+    pathData.release();
+    pathData = null;
+
+    // 確認のため append
     let uri = util.toDataURI64(svg);
     let i = new Image();
     i.src = uri;
     document.body.appendChild(i);
+    document.body.appendChild(svg);
 }, false);
 
