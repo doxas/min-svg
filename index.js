@@ -26,6 +26,36 @@ export default class SVGUtils {
     }
 
     /**
+     * attribute set to target from object
+     * @static
+     * @param {Element} element - target element
+     * @param {object} properties - any object
+     */
+    static setAttribute(element, properties){
+        if(element == null || properties == null){
+            throw genError('invalid arguments', 'setAttribute');
+        }
+        for(let p in properties){
+            element.setAttribute(p, properties[p]);
+        }
+    }
+
+    /**
+     * style set to target from object
+     * @static
+     * @param {Element} element - target element
+     * @param {object} style - any object
+     */
+    static setStyle(element, style){
+        if(element == null || style == null){
+            throw genError('invalid arguments', 'setStyle');
+        }
+        for(let s in style){
+            element.style[s] = style[s]);
+        }
+    }
+
+    /**
      * encode plane html sentence
      * @static
      * @param {Element} element - any element
@@ -75,21 +105,6 @@ export default class SVGUtils {
     static toDataURI64(element){
         let str = SVGUtils.encodeHTML(element);
         return `${SVG_SCHEME_BASE64}${SVGUtils.encodeBase64(str)}`;
-    }
-
-    /**
-     * attribute set to target from object
-     * @static
-     * @param {Element} element - target element
-     * @param {object} properties - any object
-     */
-    static setAttribute(element, properties){
-        if(element == null || properties == null){
-            throw genError('invalid arguments', 'setAttribute');
-        }
-        for(let p in properties){
-            element.setAttribute(p, properties[p]);
-        }
     }
 }
 
