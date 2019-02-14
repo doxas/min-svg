@@ -116,6 +116,11 @@ class PathData {
         this.data = '';
     }
     get d(){return this.data;}
+    clear(){
+        this.data = '';
+    }
+    clean(){this.clear();}
+    reset(){this.clear();}
     moveTo(x, y){
         if(isNumber(x) !== true || isNumber(y) !== true){
             throw genError('arguments should be number value', 'PathData.moveTo');
