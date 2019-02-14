@@ -1,5 +1,5 @@
 
-const THIS_NAME         = 'SVGUtils';
+const THIS_NAME         = 'svg-utils';
 const SVG_NS            = 'http://www.w3.org/2000/svg';
 const SVG_SCHEME        = 'data:image/svg+xml;charset=utf-8,';
 const SVG_SCHEME_BASE64 = 'data:image/svg+xml;charset=utf-8;base64,';
