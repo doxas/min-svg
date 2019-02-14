@@ -111,16 +111,38 @@ export default class SVGUtils {
     }
 }
 
+/**
+ * @class
+ */
 class PathData {
+    /**
+     * @constructor
+     */
     constructor(){
         this.data = '';
     }
+    /**
+     * @type {string}
+     */
     get d(){return this.data;}
-    clear(){
-        this.data = '';
-    }
+    /**
+     * @return {string}
+     */
+    clear(){this.data = '';}
+    /**
+     * @alias clear
+     */
     clean(){this.clear();}
+    /**
+     * @alias clear
+     */
     reset(){this.clear();}
+    /**
+     * like a Canvas2DRenderingContext.moveTo method
+     * @param {number} x - coordinate x
+     * @param {number} y - coordinate y
+     * @return {PathData} self
+     */
     moveTo(x, y){
         if(isNumber(x) !== true || isNumber(y) !== true){
             throw genError('arguments should be number value', 'PathData.moveTo');
@@ -128,6 +150,11 @@ class PathData {
         this.data += `M${x},${y}`;
         return this;
     }
+    /**
+     * like a Canvas2DRenderingContext.lineTo method
+     * @param {...number} coord - coordinates (x, y, x, y...)
+     * @return {PathData} self
+     */
     lineTo(...coord){
         if(coord == null || Array.isArray(coord) !== true || coord.length === 0){
             throw genError('invalid arguments', 'PathData.lineTo');
@@ -143,12 +170,21 @@ class PathData {
         this.data += `L${p.join(',')}`;
         return this;
     }
+    /**
+     * like a Canvas2DRenderingContext.closePath method
+     * @return {PathData} self
+     */
     closePath(){
         this.data += 'Z';
         return this;
     }
 }
 
+/**
+ * is value of number
+ * @param {number} value - check value
+ * @return {boolean}
+ */
 function isNumber(value){
     return value != null && Object.prototype.toString.call(value) === '[object Number]';
 }
