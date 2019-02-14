@@ -171,6 +171,50 @@ class PathData {
         return this;
     }
     /**
+     * like a Canvas2DRenderingContext.quadraticCurveTo method
+     * @param {number} cx - control x
+     * @param {number} cy - control y
+     * @param {number} x - coord x
+     * @param {number} y - coord y
+     * @return {PathData} self
+     */
+    quadraticCurveTo(cx, cy, x, y){
+        if(
+            isNumber(cx) !== true ||
+            isNumber(cy) !== true ||
+            isNumber(x)  !== true ||
+            isNumber(y)  !== true
+        ){
+            throw genError('invalid arguments', 'PathData.lineTo');
+        }
+        this.data += `Q${cx},${cy},${x},${y}`;
+        return this;
+    }
+    /**
+     * like a Canvas2DRenderingContext.bezierCurveTo method
+     * @param {number} cx1 - control1 x
+     * @param {number} cy1 - control1 y
+     * @param {number} cx2 - control2 x
+     * @param {number} cy2 - control2 y
+     * @param {number} x - coord x
+     * @param {number} y - coord y
+     * @return {PathData} self
+     */
+    bezierCurveTo(cx1, cy1, cx2, cy2, x, y){
+        if(
+            isNumber(cx1) !== true ||
+            isNumber(cy1) !== true ||
+            isNumber(cx2) !== true ||
+            isNumber(cy2) !== true ||
+            isNumber(x)   !== true ||
+            isNumber(y)   !== true
+        ){
+            throw genError('invalid arguments', 'PathData.lineTo');
+        }
+        this.data += `C${cx1},${cy1},${cx2},${cy2},${x},${y}`;
+        return this;
+    }
+    /**
      * like a Canvas2DRenderingContext.closePath method
      * @return {PathData} self
      */

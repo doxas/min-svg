@@ -8,16 +8,18 @@ window.addEventListener('load', () => {
     util.setAttribute(svg, {
         fill: 'none',
         stroke: 'red',
-        width: 200,
-        height: 200,
+        width: 300,
+        height: 300,
     });
     // path 要素の d 属性値を作るためのオブジェクト
     let pathData = util.createPathData();
     pathData
     .moveTo(50, 50)
     .lineTo(100, 100, 150, 75)
-    .moveTo(150, 150)
-    .lineTo(150, 50, 175, 175)
+    .moveTo(250, 50)
+    .lineTo(175, 50, 200, 175)
+    .quadraticCurveTo(300, 0, 250, 200)
+    .bezierCurveTo(0, 200, 200, 0, 50, 250)
     .closePath();
 
     let path = util.createNS('path');
