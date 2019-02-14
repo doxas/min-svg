@@ -15,15 +15,23 @@ export default class SVGUtils {
      * create namespace element
      * @static
      * @param {string} elementName - name of element
+     * @param {number} [width] - width (only svg element)
+     * @param {number} [height] - height (only svg element)
      * @return {Element}
      */
-    static createNS(elementName){
+    static createNS(elementName, width, height){
         if(document == null || elementName == null){
             throw genError('invalid arguments', 'createNS');
         }
         let element = document.createElementNS(SVG_NS, elementName);
         if(elementName.toLowerCase() === 'svg'){
             element.setAttribute('xmlns', SVG_NS);
+            if(isNumber(width) === true){
+                element.setAttribute('width', width);
+            }
+            if(isNumber(height) === true){
+                element.setAttribute('height', width);
+            }
         }
         return element;
     }

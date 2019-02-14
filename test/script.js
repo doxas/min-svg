@@ -3,13 +3,11 @@ import util from '../index.js';
 
 window.addEventListener('load', () => {
     // svg 要素など名前空間を必要とする要素の生成
-    let svg = util.createNS('svg');
+    let svg = util.createNS('svg', 300, 300);
     // setAttribute で属性を付与
     util.setAttribute(svg, {
-        fill: 'none',
-        stroke: 'red',
-        width: 300,
-        height: 300,
+        fill: 'royalblue',
+        stroke: 'navy',
     });
     // path 要素の d 属性値を作るためのオブジェクト
     let pathData = util.createPathData();
