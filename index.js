@@ -54,7 +54,7 @@ export default class SVGUtils {
             throw genError('invalid arguments', 'setStyle');
         }
         for(let s in style){
-            element.style[s] = style[s]);
+            element.style[s] = style[s];
         }
     }
 
