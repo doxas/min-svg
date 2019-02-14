@@ -9,21 +9,21 @@ window.addEventListener('load', () => {
         width: 200,
         height: 200,
     });
+    let pathData = util.createPathData();
+    pathData
+    .moveTo(50, 50)
+    .lineTo(100, 100, 150, 75)
+    .closePath();
     let path = util.createNS('path');
     util.setAttribute(path, {
         'stroke-width': 5,
-        d: 'M50,50L100,100,150,75Z',
+        d: pathData.d
     });
     svg.appendChild(path);
 
-    let uri = util.toDataURI(svg);
+    let uri = util.toDataURI64(svg);
     let i = new Image();
     i.src = uri;
     document.body.appendChild(i);
-
-    let b64 = util.toDataURI64(svg);
-    let j = new Image();
-    j.src = b64;
-    document.body.appendChild(j);
 }, false);
 

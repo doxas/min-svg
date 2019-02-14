@@ -8,6 +8,9 @@ const SVG_SCHEME_BASE64 = 'data:image/svg+xml;charset=utf-8;base64,';
  * @class
  */
 export default class SVGUtils {
+    static createPathData(){
+        return new PathData();
+    }
     /**
      * create namespace element
      * @static
@@ -106,6 +109,43 @@ export default class SVGUtils {
         let str = SVGUtils.encodeHTML(element);
         return `${SVG_SCHEME_BASE64}${SVGUtils.encodeBase64(str)}`;
     }
+}
+
+class PathData {
+    constructor(){
+        this.data = '';
+    }
+    get d(){return this.data;}
+    moveTo(x, y){
+        if(isNumber(x) !== true || isNumber(y) !== true){
+            throw genError('arguments should be number value', 'PathData.moveTo');
+        }
+        this.data += `M${x},${y}`;
+        return this;
+    }
+    lineTo(...coord){
+        if(coord == null || Array.isArray(coord) !== true || coord.length === 0){
+            throw genError('invalid arguments', 'PathData.lineTo');
+        }
+        let length = coord.length - (coord.length % 2);
+        if(length === 0){
+            throw genError('invalid arguments', 'PathData.lineTo');
+        }
+        let p = [];
+        for(let i = 0; i < length; i += 2){
+            p.push(`${coord[i]},${coord[i + 1]}`);
+        }
+        this.data += `L${p.join(',')}`;
+        return this;
+    }
+    closePath(){
+        this.data += 'Z';
+        return this;
+    }
+}
+
+function isNumber(value){
+    return value != null && Object.prototype.toString.call(value) === '[object Number]';
 }
 
 /**
