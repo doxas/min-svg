@@ -249,6 +249,38 @@ class PathData {
         return this;
     }
     /**
+     * round corner rect (use quadraticCurveTo)
+     * @param {number} x - coordinate x
+     * @param {number} y - coordinate y
+     * @param {number} width - width
+     * @param {number} height - height
+     * @param {number} radius - round corner radius
+     * @return {PathData} self
+     */
+    roundRect(x, y, width, height, radius){
+        if(
+            isNumber(x)      !== true ||
+            isNumber(y)      !== true ||
+            isNumber(width)  !== true ||
+            isNumber(height) !== true ||
+            isNumber(radius) !== true
+        ){
+            throw genError('invalid arguments', 'PathData.roundRect');
+        }
+        let rad = Math.min(Math.min(width, height) / 2, radius);
+        this.moveTo(x + rad, y)
+        .lineTo(x + width - rad, y)
+        .quadraticCurveTo(x + width, y, x + width, y + rad)
+        .lineTo(x + width, y + height - rad)
+        .quadraticCurveTo(x + width, y + height, x + width - rad, y + height)
+        .lineTo(x + rad, y + height)
+        .quadraticCurveTo(x, y + height, x, y + height - rad)
+        .lineTo(x, y + rad)
+        .quadraticCurveTo(x, y, x + rad, y)
+        .closePath();
+        return this;
+    }
+    /**
      * like a Canvas2DRenderingContext.closePath method
      * @return {PathData} self
      */

@@ -19,7 +19,8 @@ window.addEventListener('load', () => {
     .quadraticCurveTo(300, 0, 250, 200)
     .bezierCurveTo(0, 200, 200, 0, 50, 250)
     .closePath()
-    .rect(75, 75, 50, 50);
+    .rect(75, 75, 50, 50)
+    .roundRect(125, 125, 100, 100, 25);
 
     let path = util.createNS('path');
     util.setAttribute(path, {
