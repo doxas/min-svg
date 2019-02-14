@@ -193,7 +193,7 @@ class PathData {
             isNumber(x)  !== true ||
             isNumber(y)  !== true
         ){
-            throw genError('invalid arguments', 'PathData.lineTo');
+            throw genError('invalid arguments', 'PathData.quadraticCurveTo');
         }
         this.data += `Q${cx},${cy},${x},${y}`;
         return this;
@@ -217,9 +217,35 @@ class PathData {
             isNumber(x)   !== true ||
             isNumber(y)   !== true
         ){
-            throw genError('invalid arguments', 'PathData.lineTo');
+            throw genError('invalid arguments', 'PathData.bezierCurveTo');
         }
         this.data += `C${cx1},${cy1},${cx2},${cy2},${x},${y}`;
+        return this;
+    }
+    /**
+     * like a Canvas2DRenderingContext.rect method
+     * @param {number} x - coordinate x
+     * @param {number} y - coordinate y
+     * @param {number} width - width
+     * @param {number} height - height
+     * @return {PathData} self
+     */
+    rect(x, y, width, height){
+        if(
+            isNumber(x)      !== true ||
+            isNumber(y)      !== true ||
+            isNumber(width)  !== true ||
+            isNumber(height) !== true
+        ){
+            throw genError('invalid arguments', 'PathData.rect');
+        }
+        this.moveTo(x, y)
+        .lineTo(
+            x + width, y,
+            x + width, y + height,
+            x,         y + height
+        )
+        .closePath();
         return this;
     }
     /**
