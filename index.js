@@ -260,18 +260,6 @@ class PathData {
      */
     get d(){return this.data;}
     /**
-     * @return {string}
-     */
-    clear(){this.data = '';}
-    /**
-     * @alias clear
-     */
-    clean(){this.clear();}
-    /**
-     * @alias clear
-     */
-    reset(){this.clear();}
-    /**
      * like a Canvas2DRenderingContext.moveTo method
      * @param {number} x - coordinate x
      * @param {number} y - coordinate y
@@ -432,11 +420,21 @@ class PathData {
         return this;
     }
     /**
-     * release
+     * reset
      */
-    release(){
-        this.data = null;
+    reset(){
+        let d = this.data
+        this.data = '';
+        return d;
     }
+    /**
+     * @alias reset
+     */
+    clear(){return this.reset();}
+    /**
+     * @alias reset
+     */
+    clean(){return this.reset();}
 }
 
 /**
