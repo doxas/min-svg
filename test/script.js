@@ -3,22 +3,21 @@ import util from '../index.js';
 
 window.addEventListener('load', () => {
     // path 要素の d 属性値を作るためのオブジェクト
-    // ~To で終わるものはパスを明示的に閉じないしサブパスを開始することもない
+    // メソッド名が ~To で終わるものはパスを明示的に閉じないしサブパスを開始することもない
     // そうでないものはサブパスを追加し自身でパスを閉じる
-    let pathData = util.createPathData();
-
-    // パスの生成
-    pathData
-    .moveTo(50, 50)
-    .lineTo(100, 100, 150, 75)
-    .moveTo(250, 50)
-    .lineTo(175, 50, 200, 175)
-    .quadraticCurveTo(300, 0, 250, 200)
-    .bezierCurveTo(0, 200, 200, 0, 50, 250)
-    .closePath()
-    .rect(75, 75, 50, 50)
-    .roundRect(125, 125, 100, 100, 25)
-    .polygon(225, 225, 275, 225, 225, 275);
+    // reset はそこまでに生成したパス文字列を返しつつ同時に自身のパス文字列を空にする
+    let d = util.createPathData()
+                .moveTo(50, 50)
+                .lineTo(100, 100, 150, 75)
+                .moveTo(250, 50)
+                .lineTo(175, 50, 200, 175)
+                .quadraticCurveTo(300, 0, 250, 200)
+                .bezierCurveTo(0, 200, 200, 0, 50, 250)
+                .closePath()
+                .rect(75, 75, 50, 50)
+                .roundRect(125, 125, 100, 100, 25)
+                .polygon(225, 225, 275, 225, 225, 275)
+                .reset();
 
     // 線形グラデーションを定義して defs 要素に入れて返すメソッドを使い
     // SVG に append することで id 指定でグラデーションを fill に設定できる
@@ -28,6 +27,7 @@ window.addEventListener('load', () => {
     //     ['0%', '50%', '100%'],
     //     ['magenta', 'rgba(255, 255, 0, 0.1)', 'lightblue'],
     // );
+    // 円形グラデーションを定義して defs 要素に入れて返すメソッド
     let defs = util.createRadialGradient(
         'gradation',
         0.3,
@@ -49,7 +49,7 @@ window.addEventListener('load', () => {
     let path = util.createNS('path');
     util.setAttribute(path, {
         'stroke-width': 3,
-        d: pathData.d
+        d: d
     });
     // style として付与する
     util.setStyle(path, {
@@ -58,10 +58,6 @@ window.addEventListener('load', () => {
     svg.appendChild(path);
     let text = util.createText('path drawing', 25, 25);
     svg.appendChild(text);
-
-    // おそうじ例
-    pathData.release();
-    pathData = null;
 
     // 確認のため append
     let uri = util.toDataURI64(svg);
