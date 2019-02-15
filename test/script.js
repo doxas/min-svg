@@ -19,11 +19,21 @@ window.addEventListener('load', () => {
     .rect(75, 75, 50, 50)
     .roundRect(125, 125, 100, 100, 25);
 
+    // 線形グラデーションを定義して defs 要素に入れて返すメソッドを使い
+    // SVG に append することで id 指定でグラデーションを fill に設定できる
+    let defs = util.createLinearGradient(
+        'gradation',
+        Math.PI / 2.0,
+        ['0%', '50%', '100%'],
+        ['magenta', 'rgba(255, 255, 0, 0.1)', 'lightblue'],
+    );
+
     // svg 要素など名前空間を必要とする要素の生成
     let svg = util.createNS('svg', 300, 300);
+    svg.appendChild(defs);
     // setAttribute で属性を付与
     util.setAttribute(svg, {
-        fill: 'royalblue',
+        fill: 'url(#gradation)',
         stroke: 'navy',
     });
     let path = util.createNS('path');
