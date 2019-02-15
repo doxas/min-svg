@@ -42,11 +42,29 @@ export default class SVGUtils {
     }
 
     /**
+     * create text element and add text content
+     * @param {string} text - additional text
+     * @param {number} [x=0] - offset coordinate x
+     * @param {number} [y=0] - offset coordinate y
+     * @return {SVGTextElement}
+     */
+    static createText(text, x = 0, y = 0){
+        if(text == null || isString(text) !== true){
+            throw genError('invalid arguments', 'createText');
+        }
+        let txt = SVGUtils.createNS('text');
+        txt.textContent = text;
+        SVGUtils.setAttribute(txt, {x: x, y: y});
+        return txt;
+    }
+
+    /**
      * create linearGradient element in defs element
      * @param {string} id - id
      * @param {number} angle - rotate angle (radians)
      * @param {Array<string>} stop - between '0%' to '100%'
      * @param {Array<string>} color - css style color value
+     * @return {SVGDefsElement}
      */
     static createLinearGradient(id, angle, stop, color){
         if(id == null || angle == null || stop == null || color == null){
@@ -89,6 +107,7 @@ export default class SVGUtils {
      * @param {Array<string>} stop - between '0%' to '100%'
      * @param {Array<string>} color - css style color value
      * @param {string} [spread='pad'] - pad or reflect or repeat
+     * @return {SVGDefsElement}
      */
     static createRadialGradient(id, radius, originX, originY, focusX, focusY, stop, color, spread = 'pad'){
         if(
@@ -144,6 +163,7 @@ export default class SVGUtils {
      * @static
      * @param {Element} element - target element
      * @param {object} properties - any object
+     * @return {Element}
      */
     static setAttribute(element, properties){
         if(element == null || properties == null){
@@ -152,6 +172,7 @@ export default class SVGUtils {
         for(let p in properties){
             element.setAttribute(p, properties[p]);
         }
+        return element;
     }
 
     /**
@@ -159,6 +180,7 @@ export default class SVGUtils {
      * @static
      * @param {Element} element - target element
      * @param {object} style - any object
+     * @return {Element}
      */
     static setStyle(element, style){
         if(element == null || style == null){
@@ -167,6 +189,7 @@ export default class SVGUtils {
         for(let s in style){
             element.style[s] = style[s];
         }
+        return element;
     }
 
     /**
