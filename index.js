@@ -403,6 +403,27 @@ class PathData {
         return this;
     }
     /**
+     * like a Canvas2DRenderingContext.lineTo method
+     * @param {...number} coord - coordinates (x, y, x, y...)
+     * @return {PathData} self
+     */
+    polygon(...coord){
+        if(coord == null || Array.isArray(coord) !== true || coord.length === 0){
+            throw genError('invalid arguments', 'PathData.coord');
+        }
+        let length = coord.length - (coord.length % 2);
+        if(length < 4){
+            throw genError('invalid arguments', 'PathData.coord');
+        }
+        this.data += `M${coord[0]},${coord[1]}`;
+        let p = [];
+        for(let i = 2; i < length; i += 2){
+            p.push(`${coord[i]},${coord[i + 1]}`);
+        }
+        this.data += `L${p.join(',')}Z`;
+        return this;
+    }
+    /**
      * like a Canvas2DRenderingContext.closePath method
      * @return {PathData} self
      */
