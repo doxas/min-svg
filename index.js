@@ -8,9 +8,14 @@ const SVG_SCHEME_BASE64 = 'data:image/svg+xml;charset=utf-8;base64,';
  * @class
  */
 export default class SVGUtils {
+    /**
+     * create PathData instance
+     * @return {PathData}
+     */
     static createPathData(){
         return new PathData();
     }
+
     /**
      * create namespace element
      * @static
@@ -69,6 +74,67 @@ export default class SVGUtils {
                 'stop-color': color[i]
             });
             lg.appendChild(st);
+        });
+        return defs;
+    }
+
+    /**
+     * create radialGradient element in defs element
+     * @param {string} id - id
+     * @param {number} radius - gradient radius
+     * @param {number} originX - gradient origin coordinate x
+     * @param {number} originY - gradient origin coordinate y
+     * @param {number} focusX - gradient focus coordinate x
+     * @param {number} focusY - gradient focus coordinate y
+     * @param {Array<string>} stop - between '0%' to '100%'
+     * @param {Array<string>} color - css style color value
+     * @param {string} [spread='pad'] - pad or reflect or repeat
+     */
+    static createRadialGradient(id, radius, originX, originY, focusX, focusY, stop, color, spread = 'pad'){
+        if(
+            id == null ||
+            radius == null ||
+            originX == null ||
+            originY == null ||
+            focusX == null ||
+            focusY == null ||
+            stop == null ||
+            color == null ||
+            spread == null
+        ){
+            throw genError('invalid arguments', 'createRadialGradient');
+        }
+        if(
+            isString(id) !== true || id === '' ||
+            isNumber(radius) !== true ||
+            isNumber(originX) !== true || isNumber(originY) !== true ||
+            isNumber(focusX) !== true || isNumber(focusY) !== true ||
+            Array.isArray(stop) !== true || stop.length === 0 ||
+            Array.isArray(color) !== true || color.length === 0 ||
+            stop.length !== color.length ||
+            isString(spread) !== true || spread === ''
+        ){
+            throw genError('invalid arguments', 'createRadialGradient');
+        }
+        let defs = SVGUtils.createNS('defs');
+        let rg = SVGUtils.createNS('radialGradient');
+        SVGUtils.setAttribute(rg, {
+            id: id,
+            r: radius,
+            cx: originX,
+            cy: originY,
+            fx: focusX,
+            fy: focusY,
+            spreadMethod: spread
+        });
+        defs.appendChild(rg);
+        stop.map((v, i) => {
+            let st = SVGUtils.createNS('stop');
+            SVGUtils.setAttribute(st, {
+                offset: v,
+                'stop-color': color[i]
+            });
+            rg.appendChild(st);
         });
         return defs;
     }
