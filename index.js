@@ -37,6 +37,43 @@ export default class SVGUtils {
     }
 
     /**
+     * create linearGradient element in defs element
+     * @param {string} id - id
+     * @param {number} angle - rotate angle (radians)
+     * @param {Array<string>} stop - between '0%' to '100%'
+     * @param {Array<string>} color - css style color value
+     */
+    static createLinearGradient(id, angle, stop, color){
+        if(id == null || angle == null || stop == null || color == null){
+            throw genError('invalid arguments', 'createLinearGradient');
+        }
+        if(
+            isString(id) !== true || id === '' ||
+            isNumber(angle) !== true ||
+            Array.isArray(stop) !== true || stop.length === 0 ||
+            Array.isArray(color) !== true || color.length === 0 ||
+            stop.length !== color.length
+        ){
+            throw genError('invalid arguments', 'createLinearGradient');
+        }
+        let defs = SVGUtils.createNS('defs');
+        let lg = SVGUtils.createNS('linearGradient');
+        let s = Math.sin(angle);
+        let c = Math.cos(angle);
+        SVGUtils.setAttribute(lg, {id: id, x1: 0, y1: 0, x2: c, y2: s});
+        defs.appendChild(lg);
+        stop.map((v, i) => {
+            let st = SVGUtils.createNS('stop');
+            SVGUtils.setAttribute(st, {
+                offset: v,
+                'stop-color': color[i]
+            });
+            lg.appendChild(st);
+        });
+        return defs;
+    }
+
+    /**
      * attribute set to target from object
      * @static
      * @param {Element} element - target element
@@ -294,11 +331,20 @@ class PathData {
 
 /**
  * is value of number
- * @param {number} value - check value
+ * @param {mixed} value - check value
  * @return {boolean}
  */
 function isNumber(value){
     return value != null && Object.prototype.toString.call(value) === '[object Number]';
+}
+
+/**
+ * is value of string
+ * @param {mixed} value - check value
+ * @return {boolean}
+ */
+function isString(value){
+    return value != null && Object.prototype.toString.call(value) === '[object String]';
 }
 
 /**
