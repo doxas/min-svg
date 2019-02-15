@@ -17,7 +17,8 @@ window.addEventListener('load', () => {
     .bezierCurveTo(0, 200, 200, 0, 50, 250)
     .closePath()
     .rect(75, 75, 50, 50)
-    .roundRect(125, 125, 100, 100, 25);
+    .roundRect(125, 125, 100, 100, 25)
+    .polygon(225, 225, 275, 225, 225, 275);
 
     // 線形グラデーションを定義して defs 要素に入れて返すメソッドを使い
     // SVG に append することで id 指定でグラデーションを fill に設定できる
