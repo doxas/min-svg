@@ -55,6 +55,8 @@ window.addEventListener('load', () => {
         'stroke-dasharray': '5, 2'
     });
     svg.appendChild(path);
+    let text = util.createText('path drawing', 25, 25);
+    svg.appendChild(text);
 
     // おそうじ例
     pathData.release();
