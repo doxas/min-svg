@@ -21,11 +21,20 @@ window.addEventListener('load', () => {
 
     // 線形グラデーションを定義して defs 要素に入れて返すメソッドを使い
     // SVG に append することで id 指定でグラデーションを fill に設定できる
-    let defs = util.createLinearGradient(
+    // let defs = util.createLinearGradient(
+    //     'gradation',
+    //     Math.PI / 2.0,
+    //     ['0%', '50%', '100%'],
+    //     ['magenta', 'rgba(255, 255, 0, 0.1)', 'lightblue'],
+    // );
+    let defs = util.createRadialGradient(
         'gradation',
-        Math.PI / 2.0,
+        0.3,
+        0.5, 0.5,
+        0.7, 0.7,
         ['0%', '50%', '100%'],
         ['magenta', 'rgba(255, 255, 0, 0.1)', 'lightblue'],
+        'reflect'
     );
 
     // svg 要素など名前空間を必要とする要素の生成
