@@ -1,6 +1,7 @@
 
 const THIS_NAME         = 'svg-utils';
 const SVG_NS            = 'http://www.w3.org/2000/svg';
+const SVG_NS_LINK       = 'http://www.w3.org/1999/xlink';
 const SVG_SCHEME        = 'data:image/svg+xml;charset=utf-8,';
 const SVG_SCHEME_BASE64 = 'data:image/svg+xml;charset=utf-8;base64,';
 
@@ -31,6 +32,7 @@ export default class SVGUtils {
         let element = document.createElementNS(SVG_NS, elementName);
         if(elementName.toLowerCase() === 'svg'){
             element.setAttribute('xmlns', SVG_NS);
+            element.setAttribute('xmlns:xlink', SVG_NS_LINK);
             if(isNumber(width) === true){
                 element.setAttribute('width', width);
             }
