@@ -397,11 +397,11 @@ class PathData {
      */
     polygon(...coord){
         if(coord == null || Array.isArray(coord) !== true || coord.length === 0){
-            throw genError('invalid arguments', 'PathData.coord');
+            throw genError('invalid arguments', 'PathData.polygon');
         }
         let length = coord.length - (coord.length % 2);
         if(length < 4){
-            throw genError('invalid arguments', 'PathData.coord');
+            throw genError('invalid arguments', 'PathData.polygon');
         }
         this.data += `M${coord[0]},${coord[1]}`;
         let p = [];
@@ -409,6 +409,38 @@ class PathData {
             p.push(`${coord[i]},${coord[i + 1]}`);
         }
         this.data += `L${p.join(',')}Z`;
+        return this;
+    }
+    /**
+     * circle of using path
+     * @param {number} x - circle origin coordinate x
+     * @param {number} y - circle origin coordinate y
+     * @param {number} radius - circle radius
+     * @param {number} [detail=3] - circle split
+     */
+    circle(x, y, radius, detail = 3){
+        if(x == null || y == null || radius == null || detail == null){
+            throw genError('invalid arguments', 'PathData.circle');
+        }
+        if(
+            isNumber(x) !== true ||
+            isNumber(y) !== true ||
+            isNumber(radius) !== true ||
+            isNumber(detail) !== true ||
+            detail < 3
+        ){
+            throw genError('invalid arguments', 'PathData.circle');
+        }
+        const PI = Math.PI * 2.0;
+        const SP = PI / detail;
+        this.moveTo(x + radius, y);
+        for(let i = 1; i < detail; ++i){
+            let rad = SP * i;
+            let s = Math.sin(rad);
+            let c = Math.cos(rad);
+            this.lineTo(x + c * radius, y + s * radius);
+        }
+        this.closePath();
         return this;
     }
     /**
