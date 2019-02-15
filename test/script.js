@@ -17,7 +17,7 @@ window.addEventListener('load', () => {
                 .rect(75, 75, 50, 50)
                 .roundRect(125, 125, 100, 100, 25)
                 .polygon(225, 225, 275, 225, 225, 275)
-                .circle(50, 250, 25, 16)
+                .circle(50, 250, 25, 8)
                 .reset();
 
     // 線形グラデーションを定義して defs 要素に入れて返すメソッドを使い

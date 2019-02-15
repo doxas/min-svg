@@ -403,12 +403,13 @@ class PathData {
         if(length < 4){
             throw genError('invalid arguments', 'PathData.polygon');
         }
-        this.data += `M${coord[0]},${coord[1]}`;
+        this.moveTo(coord[0], coord[1]);
         let p = [];
         for(let i = 2; i < length; i += 2){
             p.push(`${coord[i]},${coord[i + 1]}`);
         }
-        this.data += `L${p.join(',')}Z`;
+        this.data += `L${p.join(',')}`;
+        this.closePath();
         return this;
     }
     /**
