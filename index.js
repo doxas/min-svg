@@ -1,5 +1,5 @@
 
-const THIS_NAME         = 'minSvg.js';
+const THIS_NAME         = 'min-svg';
 const SVG_NS            = 'http://www.w3.org/2000/svg';
 const SVG_NS_LINK       = 'http://www.w3.org/1999/xlink';
 const SVG_SCHEME        = 'data:image/svg+xml;charset=utf-8,';
