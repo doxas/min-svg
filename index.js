@@ -18,7 +18,7 @@ export default class MinSvg {
     }
 
     /**
-     * create namespace element
+     * create element with namespace
      * @static
      * @param {string} elementName - name of element
      * @param {number} [width] - width (only svg element)
@@ -113,27 +113,27 @@ export default class MinSvg {
      */
     static createRadialGradient(id, radius, originX, originY, focusX, focusY, stop, color, spread = 'pad'){
         if(
-            id == null ||
-            radius == null ||
+            id      == null ||
+            radius  == null ||
             originX == null ||
             originY == null ||
-            focusX == null ||
-            focusY == null ||
-            stop == null ||
-            color == null ||
-            spread == null
+            focusX  == null ||
+            focusY  == null ||
+            stop    == null ||
+            color   == null ||
+            spread  == null
         ){
             throw genError('invalid arguments', 'createRadialGradient');
         }
         if(
-            isString(id) !== true || id === '' ||
-            isNumber(radius) !== true ||
-            isNumber(originX) !== true || isNumber(originY) !== true ||
-            isNumber(focusX) !== true || isNumber(focusY) !== true ||
-            Array.isArray(stop) !== true || stop.length === 0 ||
-            Array.isArray(color) !== true || color.length === 0 ||
-            stop.length !== color.length ||
-            isString(spread) !== true || spread === ''
+            isString(id)         !== true         || id                === ''   ||
+            isNumber(radius)     !== true                                       ||
+            isNumber(originX)    !== true         || isNumber(originY) !== true ||
+            isNumber(focusX)     !== true         || isNumber(focusY)  !== true ||
+            Array.isArray(stop)  !== true         || stop.length       === 0    ||
+            Array.isArray(color) !== true         || color.length      === 0    ||
+            stop.length          !== color.length                               ||
+            isString(spread)     !== true         || spread            === ''
         ){
             throw genError('invalid arguments', 'createRadialGradient');
         }
@@ -161,7 +161,7 @@ export default class MinSvg {
     }
 
     /**
-     * attribute set to target from object
+     * set attribute to target from object
      * @static
      * @param {Element} element - target element
      * @param {object} properties - any object
@@ -178,7 +178,7 @@ export default class MinSvg {
     }
 
     /**
-     * style set to target from object
+     * set style to target from object
      * @static
      * @param {Element} element - target element
      * @param {object} style - any object
@@ -258,6 +258,7 @@ class PathData {
         this.data = '';
     }
     /**
+     * return this.data property
      * @type {string}
      */
     get d(){return this.data;}
@@ -393,7 +394,7 @@ class PathData {
         return this;
     }
     /**
-     * like a Canvas2DRenderingContext.lineTo method
+     * like a Canvas2DRenderingContext.lineTo method multiple call
      * @param {...number} coord - coordinates (x, y, x, y...)
      * @return {PathData} self
      */
@@ -503,8 +504,8 @@ function genError(message, methodName){
         Object.prototype.toString.call(methodName) === '[object String]' &&
         methodName !== ''
     ){
-        method = `:${methodName}`;
+        method = ` :${methodName}`;
     }
-    return new Error(`[${THIS_NAME}${method}] ${message}`);
+    return new Error(`[${THIS_NAME}${method}]${message}`);
 }
 
