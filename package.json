@@ -1,19 +1,19 @@
 {
-  "name": "svg-utils",
+  "name": "minSvg.js",
   "version": "1.0.0",
-  "description": "svg utilities",
+  "description": "simply svg utility",
   "main": "index.js",
   "scripts": {
     "test": ""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/doxas/svg-utils.git"
+    "url": "git+https://github.com/doxas/minSvg.js.git"
   },
   "author": "doxas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/doxas/svg-utils/issues"
+    "url": "https://github.com/doxas/minSvg.js/issues"
   },
-  "homepage": "https://github.com/doxas/svg-utils#readme"
+  "homepage": "https://github.com/doxas/minSvg.js#readme"
 }

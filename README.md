@@ -1,5 +1,5 @@
 
-# svg-utils
+# minSvg.js
 
-svg utilities.
+simply svg utility.
 

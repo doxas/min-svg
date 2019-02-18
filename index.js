@@ -1,5 +1,5 @@
 
-const THIS_NAME         = 'svg-utils';
+const THIS_NAME         = 'minSvg.js';
 const SVG_NS            = 'http://www.w3.org/2000/svg';
 const SVG_NS_LINK       = 'http://www.w3.org/1999/xlink';
 const SVG_SCHEME        = 'data:image/svg+xml;charset=utf-8,';
@@ -8,7 +8,7 @@ const SVG_SCHEME_BASE64 = 'data:image/svg+xml;charset=utf-8;base64,';
 /**
  * @class
  */
-export default class SVGUtils {
+export default class MinSvg {
     /**
      * create PathData instance
      * @return {PathData}
@@ -54,9 +54,9 @@ export default class SVGUtils {
         if(text == null || isString(text) !== true){
             throw genError('invalid arguments', 'createText');
         }
-        let txt = SVGUtils.createNS('text');
+        let txt = MinSvg.createNS('text');
         txt.textContent = text;
-        SVGUtils.setAttribute(txt, {x: x, y: y});
+        MinSvg.setAttribute(txt, {x: x, y: y});
         return txt;
     }
 
@@ -81,15 +81,15 @@ export default class SVGUtils {
         ){
             throw genError('invalid arguments', 'createLinearGradient');
         }
-        let defs = SVGUtils.createNS('defs');
-        let lg = SVGUtils.createNS('linearGradient');
+        let defs = MinSvg.createNS('defs');
+        let lg = MinSvg.createNS('linearGradient');
         let s = Math.sin(angle);
         let c = Math.cos(angle);
-        SVGUtils.setAttribute(lg, {id: id, x1: 0, y1: 0, x2: c, y2: s});
+        MinSvg.setAttribute(lg, {id: id, x1: 0, y1: 0, x2: c, y2: s});
         defs.appendChild(lg);
         stop.map((v, i) => {
-            let st = SVGUtils.createNS('stop');
-            SVGUtils.setAttribute(st, {
+            let st = MinSvg.createNS('stop');
+            MinSvg.setAttribute(st, {
                 offset: v,
                 'stop-color': color[i]
             });
@@ -137,9 +137,9 @@ export default class SVGUtils {
         ){
             throw genError('invalid arguments', 'createRadialGradient');
         }
-        let defs = SVGUtils.createNS('defs');
-        let rg = SVGUtils.createNS('radialGradient');
-        SVGUtils.setAttribute(rg, {
+        let defs = MinSvg.createNS('defs');
+        let rg = MinSvg.createNS('radialGradient');
+        MinSvg.setAttribute(rg, {
             id: id,
             r: radius,
             cx: originX,
@@ -150,8 +150,8 @@ export default class SVGUtils {
         });
         defs.appendChild(rg);
         stop.map((v, i) => {
-            let st = SVGUtils.createNS('stop');
-            SVGUtils.setAttribute(st, {
+            let st = MinSvg.createNS('stop');
+            MinSvg.setAttribute(st, {
                 offset: v,
                 'stop-color': color[i]
             });
@@ -231,7 +231,7 @@ export default class SVGUtils {
      * @return {string}
      */
     static toDataURI(element){
-        let str = SVGUtils.encodeHTML(element);
+        let str = MinSvg.encodeHTML(element);
         return `${SVG_SCHEME}${encodeURIComponent(str)}`;
     }
 
@@ -242,8 +242,8 @@ export default class SVGUtils {
      * @return {string}
      */
     static toDataURI64(element){
-        let str = SVGUtils.encodeHTML(element);
-        return `${SVG_SCHEME_BASE64}${SVGUtils.encodeBase64(str)}`;
+        let str = MinSvg.encodeHTML(element);
+        return `${SVG_SCHEME_BASE64}${MinSvg.encodeBase64(str)}`;
     }
 }
 
